@@ -1,0 +1,86 @@
+.adv-sal-green, .adv-sal-green-hover:hover
+{
+    color:#94D1BE;
+}
+
+.adv-sal-green-background, .adv-sal-green-background-hover:hover
+{
+    background-color:#94D1BE;
+}
+
+.adv-sal-green-border,.adv-sal-green-border-hover:hover
+{
+    border: 2px solid #94D1BE;
+}
+
+.adv-sal-red, .adv-sal-red-hover:hover
+{
+    color:#d03516;
+}
+
+.adv-sal-red-background, .adv-sal-red-background-hover:hover
+{
+    background-color:#d03516;
+}
+
+.adv-sal-red-border,.adv-sal-red-border-hover:hover
+{
+    border: 2px solid #d03516;
+}
+
+
+.black-overlay:before
+{
+    background-color:rgba(0,0,0,0.6);
+}
+
+
+
+
+
+
+
+.white, .white-hover:hover
+{
+    color:#fff;
+}
+
+
+.white-background, .white-background-hover:hover
+{
+    background-color:#fff;
+}
+
+
+
+
+
+
+
+
+.light-grey, .light-grey-hover:hover
+{
+    color:#e8e8e8;
+}
+
+
+.light-grey-background, .light-grey-background-hover:hover
+{
+    background-color:#e8e8e8;
+}
+
+
+.dark-grey, .dark-grey-hover:hover
+{
+    color:#191919;
+}
+
+
+.dark-grey-background, .dark-grey-background-hover:hover
+{
+    background-color:#191919;
+}
+
+
+
+

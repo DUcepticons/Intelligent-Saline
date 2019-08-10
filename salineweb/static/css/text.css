@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap');
+
+
+body,h1,h2,h3,h4,h5,h6{
+    font-family:Poppins;
+}
+
+h1,h2, .bold-text
+{
+    font-weight:700;
+}
+
+.ultra-bold-text
+{
+    font-weight:800;
+}
+
+
+
+.small-text
+{
+    font-size:0.9em;
+}

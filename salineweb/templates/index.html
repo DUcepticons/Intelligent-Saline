@@ -1,0 +1,40 @@
+{% load staticfiles %}
+
+{% include "header.html" %}
+<body>
+  {% include "navbar.html" %}
+   
+    <div class="section dark-grey-background"  >
+        <h1 class="adv-sal-red text-center" style="margin-bottom:50px;">Critical Patients</h1>
+        <div class="container-1200px row landing-section">
+
+          {% for i in patients %}
+
+              {% if i.percentage <= critical_value %}
+                  <div class="col-lg-3 col-12 text-center text-lg-left patient-column ">
+                      <h4 class="adv-sal-green">Floor 0{{i.floor}}</h4>
+                      <p class="white">Room no: 0{{i.room}}</p>
+                      <p class="white">Bed no: 0{{i.bed_no}}</p>
+
+                      <p class="white ">Remaining Saline: {{i.percentage}}%</p>
+                      <div class="progress adv-sal-red-border" style="height: 25px;width:100%;border-radius:50px;">
+                          <div class="progress-bar adv-sal-red-background" role="progressbar" style="width: {{i.percentage}}%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                  </div>
+              {% endif %}
+
+          {% endfor %}
+            <!--
+            <div class="col-lg-3 col-12 text-center text-lg-left patient-column">
+                <h4 class="adv-sal-green">Floor 02</h4>
+                <p class="white">Bed no: 08</p>
+                
+                <p class="white ">Remaining Saline: 30%</p>
+                <div class="progress adv-sal-red-border" style="height: 25px;width:100%;border-radius:50px;">
+                  <div class="progress-bar adv-sal-red-background" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+            -->     
+        </div>
+  </div>      
+</body>

@@ -1,0 +1,116 @@
+/*991 and below is considered mobile (includes small tablets)
+992 and above is considered desktop (includes large tablets) */
+a:hover
+{
+    text-decoration:none;
+}
+@media(min-width:992px)
+{
+    .hide-desktop
+    {
+        display:none;
+    }
+}
+
+@media(max-width:991px)
+{
+    .hide-mobile
+    {
+        display:none;
+    }
+}
+
+
+
+.container-960px
+{
+    max-width:960px;
+    margin:0 auto;
+}
+
+.container-1200px
+{
+    max-width:1200px;
+    margin:0 auto;
+}
+.section
+{
+    padding-top:100px;
+    padding-bottom:100px;
+    position:relative;
+}
+
+@media(max-width:991px)
+{
+    .section
+    {
+        padding-top:50px;
+        padding-bottom:50px;
+    }
+}
+
+.adv-sal-button
+{
+    border-radius:0px;
+    padding:20px;
+    font-size:15px;
+    text-transform:uppercase;
+    text-decoration:none!important;
+    margin-top:30px;
+    margin-bottom:30px;
+    letter-spacing:3px;
+}
+
+
+/*alignments */
+
+.vertically-middle
+{
+    align-items: center;
+    display:flex;
+}
+
+.horizontal-middle
+{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+.horizontal-middle-flex
+{
+    justify-content:center;
+    display:flex;
+}
+
+
+/*paddings and margins */
+
+@media(max-width:991px)
+{
+    .padding-15px-mobile
+    {
+      padding-left:15px;
+      padding-right:15px;
+    }
+    
+    .no-padding-mobile
+    {
+        padding-left:0px!important;
+        padding-right:0px!important;
+    }
+}
+
+.overlay:before
+{
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+	

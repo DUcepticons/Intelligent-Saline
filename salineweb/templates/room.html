@@ -7,31 +7,42 @@
     <div class="section dark-grey-background"  >
         <h1 class="adv-sal-green text-center" style="margin-bottom:50px;">Floor 0{{floor_no}} | Room 0{{room_no}}</h1>
         <div class="container-1200px row landing-section">
+
+
             {% for i in patients %}
 
                 {% if i.floor == floor_no and i.room == room_no %}
                     <div class="col-lg-3 col-12 text-center text-lg-left patient-column ">
                         <h4 class="adv-sal-green">Bed no: 0{{i.bed_no}}</h4>
                         <p class="white ">Remaining Saline:{{i.percentage}}%</p>
-                        <div class="progress adv-sal-red-border" style="height: 25px;width:100%;border-radius:50px;">
-                          <div class="progress-bar adv-sal-red-background" role="progressbar" style="width: {{i.percentage}}%;" aria-valuenow="30"aria-valuemin="0" aria-valuemax="100">
-                          </div>
+                        <div id="app{{i.bed_no}}" class="progress adv-sal-red-border" style="height: 25px;width:100%;border-radius:50px;">
+
                         </div>
+                          <script type="text/babel">
+
+							var divStyle{{i.bed_no}} = {
+								width: '{{i.percentage}}%'
+							}
+
+                            class App extends React.Component {
+
+
+
+								render(){
+									return(
+										<div className="progress-bar adv-sal-red-background" role="progressbar" style={ divStyle{{i.bed_no}} } aria-valuenow="30"aria-valuemin="0" aria-valuemax="100">
+										</div>
+
+									)
+								}
+                            }
+
+                            ReactDOM.render(<App />, document.getElementById('app{{i.bed_no}}'));
+                          </script>
                     </div>
                 {% endif %}
 <!--
-                {% if i.ID == 2 %}
-                    <div class="col-lg-3 col-12 text-center text-lg-left patient-column">
-                        <h4 class="adv-sal-green">Bed no: 02</h4>
-             
-                        <p class="white ">Remaining Saline: {{i.percentage}}%</p>
-                        <div class="progress adv-sal-red-border" style="height: 25px;width:100%;border-radius:50px;">
-                            <div class="progress-bar adv-sal-red-background" role="progressbar" style="width: {{i.percentage}}%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">                   
-                            </div>
 
-                        </div>
-                    </div>
-                {% endif %}
 -->
             {% endfor %}
 

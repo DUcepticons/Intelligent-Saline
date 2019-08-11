@@ -14,7 +14,8 @@ def rooms_under_Floor(floor_no):        #for floor page
     all_rooms = []
     for p in patient.objects.filter(floor=floor_no):
         all_rooms.append(p.room)
-    return unique(all_rooms)
+    all_rooms_pair = [(i,all_rooms.count(i),p.percentage ) for i in unique(all_rooms)]
+    return all_rooms_pair
 
 def beds_under_Room(floor_no,room_no):        #for floor page
 	all_beds = []

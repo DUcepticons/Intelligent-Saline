@@ -7,6 +7,8 @@
     <div class="section dark-grey-background"  >
         <h1 class="adv-sal-green text-center" style="margin-bottom:50px;">Floor 0{{floor_no}} | Room 0{{room_no}}</h1>
         <div class="container-1200px row landing-section">
+
+
             {% for i in patients %}
 
                 {% if i.floor == floor_no and i.room == room_no %}
@@ -17,6 +19,7 @@
                           <div class="progress-bar adv-sal-red-background" role="progressbar" style="width: {{i.percentage}}%;" aria-valuenow="30"aria-valuemin="0" aria-valuemax="100">
                           </div>
                         </div>
+
                     </div>
                 {% endif %}
 <!--

@@ -11,16 +11,18 @@
         <h1 class="adv-sal-green text-center" style="margin-bottom:10px;">Floor {{floor_no}}</h1>
         <h5 class="adv-sal-green text-center" style="margin-bottom:90px;">Number of patients: 0{{patient_count}} </h5>
         <div class="container-1200px row landing-section">
+
             {%for room_number in rooms_under_Floor %}
-        
+                
                 <div class="col-lg-3 col-12 text-center text-lg-left patient-column ">
-                    <a href="room/{{room_number}}" class="">
+                    <a href="room/{{room_number.0}}" class="">
                         <div>
-                            <h2 class="adv-sal-red">Room no: 0{{room_number}}</h2>
-                            <!--
-                            <p class="white">Number of patients: 02 </p>
-                            <p class="adv-sal-red">Critical patients: 01 </p>
-                            -->
+                            <h2 class="adv-sal-red">Room no: 0{{room_number.0}}</h2>
+                            
+                            <p class="white">Number of patients: 0{{room_number.1}} </p>
+                            
+                            <!-- <p class="adv-sal-red">Critical patients: 0{{room_number.2}} </p> -->
+                            
                         </div>
                     </a>                        
                 </div>

@@ -14,8 +14,8 @@ def rooms_under_Floor(floor_no):        #for floor page
     all_rooms = []
     for p in patient.objects.filter(floor=floor_no):
         all_rooms.append(p.room)
-    all_rooms_pair = [(i,all_rooms.count(i),p.percentage ) for i in unique(all_rooms)]
-    return all_rooms_pair
+    room_data = [(i,all_rooms.count(i), patient.objects.filter(floor = floor_no , room = i , percentage__lte = 20).count() ) for i in unique(all_rooms)]
+    return room_data
 
 def beds_under_Room(floor_no,room_no):        #for floor page
 	all_beds = []
@@ -56,3 +56,13 @@ def room2(request):
 	#return HttpResponse('<h1>Hi Akash</h1>')
 	return render(request,"room2.html")
 '''
+
+
+def ajaxroomdata(request):
+	if request.method == 'GET':
+		received_floor = request.GET.get('sent_floor')
+		received_room = request.GET.get('sent_room')
+		received_bed = request.GET.get('sent_bed')
+		ajaxObject = patient.objects.get(floor = received_floor,room=received_room,bed_no=received_bed)
+		return render(request=request,template_name="ajaxroomdata.html",
+			context={"dynamicpercentage": ajaxObject.percentage })

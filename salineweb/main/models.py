@@ -7,9 +7,5 @@ class patient(models.Model):
 	bed_no = models.IntegerField(default=0)
 	percentage = models.IntegerField(default=0)
 
-
-
-
-
-def __str__(self):
-	return self.name
+	def __str__(self):
+		return self.name

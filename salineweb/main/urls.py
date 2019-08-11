@@ -22,4 +22,5 @@ urlpatterns = [
     path('floor/<int:floor_no>/room/<int:room_no>/',views.room,name='room'),
     #path('room1/',views.room1, name='room1'),
     #path('room2/',views.room2, name='room2'),
+    path('ajax/', views.ajaxroomdata, name='ajaxroomdata'),
 ]

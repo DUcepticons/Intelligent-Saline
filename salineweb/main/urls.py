@@ -20,7 +20,7 @@ urlpatterns = [
     path('',views.homepage, name='homepage'),
     path('floor/<int:floor_no>/',views.floor,name='floor'),
     path('floor/<int:floor_no>/room/<int:room_no>/',views.room,name='room'),
-    #path('room1/',views.room1, name='room1'),
-    #path('room2/',views.room2, name='room2'),
     path('ajax/', views.ajaxroomdata, name='ajaxroomdata'),
+    path('receive/<int:floor>/<int:room>/<int:bed>/<int:percentage>/',views.receive,name='receive')
+    
 ]

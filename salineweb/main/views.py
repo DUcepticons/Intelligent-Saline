@@ -66,3 +66,16 @@ def ajaxroomdata(request):
 		ajaxObject = patient.objects.get(floor = received_floor,room=received_room,bed_no=received_bed)
 		return render(request=request,template_name="ajaxroomdata.html",
 			context={"dynamicpercentage": ajaxObject.percentage })
+
+def receive(request,floor,room,bed,percentage):
+	if patient.objects.filter(floor=floor,room=room,bed_no=bed):
+		received_ID= patient.objects.filter(floor=floor,room=room,bed_no=bed)
+		received_ID.update(percentage=percentage)
+		return HttpResponse('Data successfully updated')
+	else:
+		patient.objects.create(floor=floor,room=room,bed_no=bed,percentage=percentage)
+		return HttpResponse('Data successfully created')
+
+	
+
+

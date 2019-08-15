@@ -62,12 +62,12 @@ void loop() {
   //GET Data
   
   sendPercentage-- ; 
-  Link = "http://192.168.0.12:8000/receive/1/1/4/" + String(sendPercentage) + "/";
-
+  Link = "http://192.168.0.12:8000/receive/";
+  String postData = "1,1,5," + String(sendPercentage);
   Serial.print(Link);
   http.begin(Link);     //Specify request destination
   
-  int httpCode = http.GET();            //Send the request
+  int httpCode = http.POST(postData);            //Send the request
   String payload = http.getString();    //Get the response payload
 
   Serial.println(httpCode);   //Print HTTP return code

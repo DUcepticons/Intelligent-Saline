@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context, loader
+from django.views.decorators.csrf import csrf_exempt
 from .models import patient
 from numpy import unique
 
@@ -67,15 +68,23 @@ def ajaxroomdata(request):
 		return render(request=request,template_name="ajaxroomdata.html",
 			context={"dynamicpercentage": ajaxObject.percentage })
 
-def receive(request,floor,room,bed,percentage):
-	if patient.objects.filter(floor=floor,room=room,bed_no=bed):
-		received_ID= patient.objects.filter(floor=floor,room=room,bed_no=bed)
+@csrf_exempt
+def receive(request):
+	received_values = request.body.decode('utf-8').split(",")
+	#The received_values list will be now like this [floor,room,bed_no,percentage] e.g. [1,2,3,90]
+	floor=received_values[0]
+	room=received_values[1]
+	bed_no=received_values[2]
+	percentage=received_values[3]
+
+	if patient.objects.filter(floor=floor,room=room,bed_no=bed_no):
+		received_ID= patient.objects.filter(floor=floor,room=room,bed_no=bed_no)
 		received_ID.update(percentage=percentage)
 		return HttpResponse('Data successfully updated')
 	else:
-		patient.objects.create(floor=floor,room=room,bed_no=bed,percentage=percentage)
+		patient.objects.create(floor=floor,room=room,bed_no=bed_no,percentage=percentage)
 		return HttpResponse('Data successfully created')
-
+	
 	
 
 

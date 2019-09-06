@@ -21,6 +21,7 @@ urlpatterns = [
     path('floor/<int:floor_no>/',views.floor,name='floor'),
     path('floor/<int:floor_no>/room/<int:room_no>/',views.room,name='room'),
     path('ajax/', views.ajaxroomdata, name='ajaxroomdata'),
+    path('ajaxhome/', views.ajaxhomeroomdata, name='ajaxhomeroomdata'),
     path('receive/',views.receive,name='receive')
     
 ]

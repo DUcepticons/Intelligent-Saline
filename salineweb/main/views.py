@@ -66,7 +66,15 @@ def ajaxroomdata(request):
 		received_bed = request.GET.get('sent_bed')
 		ajaxObject = patient.objects.get(floor = received_floor,room=received_room,bed_no=received_bed)
 		return render(request=request,template_name="ajaxroomdata.html",
-			context={"dynamicpercentage": ajaxObject.percentage })
+			context={"dynamicpercentage": ajaxObject.percentage,
+					"critical_value":20 })
+
+def ajaxhomeroomdata(request):
+	if request.method == 'GET':
+		return render(request=request,template_name="ajaxhomeroomdata.html",
+					context={"patients":patient.objects.all,
+				  	"floors":floors(),
+				  	"critical_value":20})
 
 @csrf_exempt
 def receive(request):
@@ -86,5 +94,6 @@ def receive(request):
 		return HttpResponse('Data successfully created')
 	
 	
+
 
 

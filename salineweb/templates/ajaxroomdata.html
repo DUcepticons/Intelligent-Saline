@@ -1,14 +1,17 @@
 
-<p class="white ">Remaining Saline:{{dynamicpercentage}}%</p>
-
-
-{% if dynamicpercentage <= critical_value %}
-<div class="progress adv-sal-red-border" style="height: 25px;width:100%;border-radius:50px;" >
-	<div class="progress-bar adv-sal-red-background" role="progressbar" style="width: {{dynamicpercentage}}%;" aria-valuemin="0" aria-valuemax="100">
-{% else %}
-<div class="progress adv-sal-green-border" style="height: 25px;width:100%;border-radius:50px;" >
-	<div class="progress-bar adv-sal-green-background" role="progressbar" style="width: {{dynamicpercentage}}%;" aria-valuemin="0" aria-valuemax="100">
-{% endif %}	
+<div class="col-9">
+	<p class="white">Bed no: 0{{bed_ajax}}</p>
+	<p class="white ">Remaining Saline:{{dynamicpercentage}}%</p>
+</div>
+<div class="col-3">
+	{% if dynamicpercentage <= critical_value %}
+	<div class="progress adv-sal-red-border" style="height: 150px;width:25px;border-radius:50px;" >
+		<div class="progress-bar adv-sal-red-background" role="progressbar" style="height:{{dynamicpercentage}}%;top:calc(100% - {{dynamicpercentage}}% );" aria-valuemin="0" aria-valuemax="100">
+	{% else %}
+	<div class="progress adv-sal-green-border" style="height: 150px;width:25px;border-radius:50px;" >
+		<div class="progress-bar adv-sal-green-background" role="progressbar" style="height:{{dynamicpercentage}}%;top:calc(100% - {{dynamicpercentage}}% );"  aria-valuemin="0" aria-valuemax="100">
+	{% endif %}	
+		</div>
 	</div>
 </div>
 

@@ -66,7 +66,7 @@ def ajaxroomdata(request):
 		received_bed = request.GET.get('sent_bed')
 		ajaxObject = patient.objects.get(floor = received_floor,room=received_room,bed_no=received_bed)
 		return render(request=request,template_name="ajaxroomdata.html",
-			context={"dynamicpercentage": ajaxObject.percentage,
+			context={"dynamicpercentage": ajaxObject.percentage, "bed_ajax": ajaxObject.bed_no,
 					"critical_value":20 })
 
 def ajaxhomeroomdata(request):

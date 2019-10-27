@@ -43,3 +43,11 @@
     user-select: none;
 		cursor: default;
 }
+
+/* Vertical */
+.progress{
+	position: absolute;right:15px;
+}
+.progress-bar{
+	position:absolute; width: 100%;
+}

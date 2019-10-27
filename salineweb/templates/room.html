@@ -5,7 +5,7 @@
     {% include "navbar.html" %}
 
     <div class="section dark-grey-background"  >
-        <h1 class="adv-sal-green text-center" style="margin-bottom:50px;">Floor 0{{floor_no}} | Room 0{{room_no}}</h1>
+        <h1 class="adv-sal-green text-center" style="margin-bottom:50px;"><span class="white">Floor 0{{floor_no}}</span> | Room 0{{room_no}}</h1>
         <div class="container-1200px row landing-section">
 
 
@@ -13,8 +13,10 @@
 
                 {% if i.floor == floor_no and i.room == room_no %}
                     <div class="col-lg-3 col-12  patient-column ">
-                        <div class="row" id="bed{{i.bed_no}}">
+                        <div class="white-opaque-border all-border patient-column-inner">
+                            <div class="row" id="bed{{i.bed_no}}">
 
+                            </div>
                         </div>
 
 

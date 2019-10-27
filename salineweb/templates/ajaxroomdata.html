@@ -1,7 +1,13 @@
 
 <div class="col-9">
-	<p class="white">Bed no: 0{{bed_ajax}}</p>
-	<p class="white ">Remaining Saline:{{dynamicpercentage}}%</p>
+	<p class="white" style="margin-bottom: 0px;">Bed no: </p>
+	<p class="white large-text bold-text">0{{bed_ajax}}</p>
+	<p class="white " style="margin-bottom: 0px;">Remaining Saline:</p>
+	{% if dynamicpercentage <= critical_value %}
+		<p class="adv-sal-red large-text bold-text">{{dynamicpercentage}}%</p>
+	{% else %}
+		<p class="adv-sal-green large-text bold-text">{{dynamicpercentage}}%</p>
+	{% endif %}	
 </div>
 <div class="col-3">
 	{% if dynamicpercentage <= critical_value %}

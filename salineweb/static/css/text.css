@@ -15,7 +15,10 @@ h1,h2, .bold-text
     font-weight:800;
 }
 
-
+.large-text
+{
+    font-size:1.5em;	
+}
 
 .small-text
 {

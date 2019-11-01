@@ -1,0 +1,125 @@
+{% load staticfiles %}
+{% include "header.html" %}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js" crossorigin="anonymous"></script>
+
+
+
+
+
+
+<body>
+	<div class="section">
+		<div class="container-1200px" >
+			<h2 class="bold-text padding-15px-mobile">Add a new device</h2>
+			<form style="max-width:600px;margin-bottom:30px;" class="padding-15px-mobile">
+				<div class="form-group">
+				    <label for="device">Device ID</label>
+				    <input type="text" class="form-control" id="device" style="margin-bottom: 20px;">
+				    <div class="row no-margin" style="margin-bottom: 20px;">
+				    	<div class="col-4 no-padding">
+						    
+						    <label for="floor">Floor Number</label>
+						    <input type="number" class="form-control" id="floor" >
+						</div>
+				    	<div class="col-4">
+					    
+						    <label for="room">Room Number</label>
+						    <input type="number" class="form-control" id="room" >
+						</div>
+				    	<div class="col-4 no-padding">
+						    <label for="bed">Bed Number</label>
+						    <input type="number" class="form-control" id="bed" >
+						</div>
+
+					</div>
+					<button type="submit" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Connect Device</button>
+				</div>
+
+			</form>
+			<h2 class="bold-text">Existing devices</h2>
+			<table id="devices-table" class="display" style="width:100%;">
+				<thead>
+		            <tr>
+		                <th>Device ID</th>
+		                <th>Floor</th>
+		                <th>Room</th>
+		                <th>Bed</th>
+		                <th>Edit</th>
+		                <th>Delete</th>
+		            </tr>
+	        	</thead>
+	        	<tbody>
+		            <tr>
+		                <td>PAT-000001</td>
+		                <td>4</td>
+		                <td>5</td>
+		                <td>6</td>
+		                <td><button type="button" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Edit</button></td>
+		                <td><button type="button" class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border">Delete</button></td>
+
+		            </tr>
+		            <tr>
+		                <td>PAT-000002</td>
+		                <td>4</td>
+		                <td>5</td>
+		                <td>7</td>
+		                <td><button type="button" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Edit</button></td>
+		                <td><button type="button" class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border">Delete</button></td>
+
+		            </tr>
+		        </tbody>
+		        <tfoot>
+		            <tr>
+		                <th>Device ID</th>
+		                <th>Floor</th>
+		                <th>Room</th>
+		                <th>Bed</th>
+		                <th>Edit</th>
+		                <th>Delete</th>
+		            </tr>
+		        </tfoot>
+	    	</table>
+			
+			<script type="text/javascript">
+			$(document).ready(function() {
+			    $('#devices-table').DataTable();
+			} );
+			</script>
+
+			<h2 class="bold-text padding-15px-mobile" style="margin-top:30px;">Edit Device PAT-000001</h2>
+			<form style="max-width:600px;" class="padding-15px-mobile">
+				
+				<div class="form-group">
+				    <label for="device">Device ID</label>
+				    <input type="text" class="form-control" id="device" style="margin-bottom: 20px;" value="PAT-000001" disabled>
+				    <div class="row no-margin" style="margin-bottom: 20px;">
+				    	<div class="col-4 no-padding">
+						    
+						    <label for="floor">Floor Number</label>
+						    <input type="number" class="form-control" id="floor" value="3">
+						</div>
+				    	<div class="col-4">
+					    
+						    <label for="room">Room Number</label>
+						    <input type="number" class="form-control" id="room" value="3">
+						</div>
+				    	<div class="col-4 no-padding">
+						    <label for="bed">Bed Number</label>
+						    <input type="number" class="form-control" id="bed" value="3">
+						</div>
+
+					</div>
+					<button type="submit" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Connect Device</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</body>

@@ -4,6 +4,8 @@ a:hover
 {
     text-decoration:none;
 }
+
+
 @media(min-width:992px)
 {
     .hide-desktop
@@ -86,6 +88,17 @@ a:hover
 
 /*paddings and margins */
 
+@media(min-width:992px)
+{
+
+    
+    .no-padding-desktop
+    {
+        padding-left:0px!important;
+        padding-right:0px!important;
+    }
+}
+
 @media(max-width:991px)
 {
     .padding-15px-mobile
@@ -100,6 +113,25 @@ a:hover
         padding-right:0px!important;
     }
 }
+
+.no-margin
+{
+    margin-left: 0px!important;
+    margin-right: 0px!important;
+}
+
+.no-padding
+{
+    padding-left:0px!important;
+    padding-right:0px!important;
+}
+
+.padding-15px
+{
+  padding-left:15px!important;
+  padding-right:15px!important;
+}
+
 
 .overlay:before
 {

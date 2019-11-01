@@ -76,6 +76,9 @@ def ajaxhomeroomdata(request):
 				  	"floors":floors(),
 				  	"critical_value":20})
 
+def devices(request):
+	return render(request=request,template_name="devices.html")
+
 @csrf_exempt
 def receive(request):
 	received_values = request.body.decode('utf-8').split(",")

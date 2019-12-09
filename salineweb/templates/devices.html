@@ -18,24 +18,24 @@
 	<div class="section">
 		<div class="container-1200px" >
 			<h2 class="bold-text padding-15px-mobile">Add a new device</h2>
-			<form style="max-width:600px;margin-bottom:30px;" class="padding-15px-mobile">
+			<form style="max-width:600px;margin-bottom:30px;" class="padding-15px-mobile" action="/devices/" method="POST"> {% csrf_token %}
 				<div class="form-group">
 				    <label for="device">Device ID</label>
-				    <input type="text" class="form-control" id="device" style="margin-bottom: 20px;">
+				    <input type="text" class="form-control" name="device_id" style="margin-bottom: 20px;">
 				    <div class="row no-margin" style="margin-bottom: 20px;">
 				    	<div class="col-4 no-padding">
 						    
 						    <label for="floor">Floor</label>
-						    <input type="number" class="form-control" id="floor" >
+						    <input type="number" class="form-control" name="floor" >
 						</div>
 				    	<div class="col-4">
 					    
 						    <label for="room">Room</label>
-						    <input type="number" class="form-control" id="room" >
+						    <input type="number" class="form-control" name="room" >
 						</div>
 				    	<div class="col-4 no-padding">
 						    <label for="bed">Bed</label>
-						    <input type="number" class="form-control" id="bed" >
+						    <input type="number" class="form-control" name="bed_no" >
 						</div>
 
 					</div>
@@ -56,26 +56,22 @@
 		            </tr>
 	        	</thead>
 	        	<tbody>
-		            <tr>
-		                <td>PAT-000001</td>
-		                <td>4</td>
-		                <td>5</td>
-		                <td>6</td>
-		                <td><button type="button" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Edit</button></td>
-		                <td><button type="button" class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border">Delete</button></td>
+		            
+		                {%for p in patients %}
+		                	<tr>
+				                <td>{{p.device_id}}</td>
+				                <td>{{p.floor}}</td>
+				                <td>{{p.room}}</td>
+				                <td>{{p.bed_no}}</td>
+				                <td><button type="button" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Edit</button></td>
+				                <td><button type="button" class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border">Delete</button></td>
+							</tr>
+			                        
+			            {% endfor %}
 
-		            </tr>
-		            <tr>
-		                <td>PAT-000002</td>
-		                <td>4</td>
-		                <td>5</td>
-		                <td>7</td>
-		                <td><button type="button" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Edit</button></td>
-		                <td><button type="button" class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border">Delete</button></td>
-
-		            </tr>
+		            
 		        </tbody>
-		        <tfoot>
+		        <!-- <tfoot>
 		            <tr>
 		                <th>Device ID</th>
 		                <th>Floor</th>
@@ -84,7 +80,7 @@
 		                <th>Edit</th>
 		                <th>Delete</th>
 		            </tr>
-		        </tfoot>
+		        </tfoot> -->
 	    	</table>
 			
 			<script type="text/javascript">

@@ -77,7 +77,25 @@ def ajaxhomeroomdata(request):
 				  	"critical_value":20})
 
 def devices(request):
-	return render(request=request,template_name="devices.html")
+	if request.method == 'POST':
+		new_device_id = request.POST.get('device_id','')
+		new_floor = request.POST.get('floor','')
+		new_room = request.POST.get('room','')
+		new_bed_no = request.POST.get('bed_no','')
+
+		if new_device_id != "" and new_floor != "" and new_room != "" and new_bed_no != "":
+
+			if patient.objects.filter(device_id=new_device_id):
+				received_ID= patient.objects.filter(device_id=new_device_id)
+				received_ID.update(floor=new_floor,room=new_room,bed_no=new_bed_no)
+				#return HttpResponse('Data successfully updated')
+			else:
+				patient.objects.create(device_id=new_device_id, floor=new_floor,room=new_room,bed_no=new_bed_no)
+				#return HttpResponse('Data successfully created')
+
+	return render(request, template_name='devices.html',
+				context={"patients":patient.objects.all})
+
 
 @csrf_exempt
 def receive(request):
@@ -95,8 +113,3 @@ def receive(request):
 	else:
 		patient.objects.create(floor=floor,room=room,bed_no=bed_no,percentage=percentage)
 		return HttpResponse('Data successfully created')
-	
-	
-
-
-

@@ -82,7 +82,7 @@ void loop() {
     sendPercentage=100;
   }  
   Link = "http://192.168.0.105:8000/receive/";
-  String postData = "7,2,5," + String(sendPercentage);
+  String postData = "PAT00001," + String(sendPercentage);
   Serial.print(Link);
   http.begin(Link);     //Specify request destination
   

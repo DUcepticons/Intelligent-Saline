@@ -51,7 +51,7 @@
 		                <th>Floor</th>
 		                <th>Room</th>
 		                <th>Bed</th>
-		                <th>Edit</th>
+		                
 		                <th>Delete</th>
 		            </tr>
 	        	</thead>
@@ -62,9 +62,12 @@
 				                <td>{{p.device_id}}</td>
 				                <td>{{p.floor}}</td>
 				                <td>{{p.room}}</td>
-				                <td>{{p.bed_no}}</td>
-				                <td><button type="button" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Edit</button></td>
-				                <td><button type="button" class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border">Delete</button></td>
+				                <td>{{p.bed_no}}</td>				                
+				                <td>
+				                	<form>
+				                		<button type="submit" class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border">Delete</button>
+				                	</form>
+				                </td>
 							</tr>
 			                        
 			            {% endfor %}
@@ -89,7 +92,7 @@
 			} );
 			</script>
 
-			<h2 class="bold-text padding-15px-mobile" style="margin-top:30px;">Edit Device PAT-000001</h2>
+<!-- 			<h2 class="bold-text padding-15px-mobile" style="margin-top:30px;">Edit Device PAT-000001</h2>
 			<form style="max-width:600px;" class="padding-15px-mobile">
 				
 				<div class="form-group">
@@ -115,7 +118,7 @@
 					<button type="submit" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Reconnect Device</button>
 				</div>
 
-			</form>
+			</form> -->
 		</div>
 	</div>
 </body>

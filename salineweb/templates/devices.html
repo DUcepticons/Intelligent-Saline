@@ -64,8 +64,8 @@
 				                <td>{{p.room}}</td>
 				                <td>{{p.bed_no}}</td>				                
 				                <td>
-				                	<form>
-				                		<button type="submit" class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border">Delete</button>
+				                	<form action="/devices/" method="POST"> {% csrf_token %}
+				                		<button type="submit" onclick="alert('You are about to DELETE a device!!!')" name="delete" value={{p.device_id}} class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border">Delete</button>
 				                	</form>
 				                </td>
 							</tr>

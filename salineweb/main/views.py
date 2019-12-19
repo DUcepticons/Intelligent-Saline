@@ -83,7 +83,9 @@ def devices(request):
 		new_room = request.POST.get('room','')
 		new_bed_no = request.POST.get('bed_no','')
 
-		if new_device_id != "" and new_floor != "" and new_room != "" and new_bed_no != "":
+		device_to_delete = request.POST.get('delete','')
+
+		if new_device_id != "" and new_floor != "" and new_room != "" and new_bed_no != "": #update or create will work only if all fields are filled
 
 			if patient.objects.filter(device_id=new_device_id):
 				received_ID= patient.objects.filter(device_id=new_device_id)
@@ -92,6 +94,8 @@ def devices(request):
 			else:
 				patient.objects.create(device_id=new_device_id, floor=new_floor,room=new_room,bed_no=new_bed_no)
 				#return HttpResponse('Data successfully created')
+		elif device_to_delete !="": #Delete operation block
+			patient.objects.filter(device_id=device_to_delete).delete()
 
 	return render(request, template_name='devices.html',
 				context={"patients":patient.objects.all})
@@ -100,16 +104,15 @@ def devices(request):
 @csrf_exempt
 def receive(request):
 	received_values = request.body.decode('utf-8').split(",")
-	#The received_values list will be now like this [floor,room,bed_no,percentage] e.g. [1,2,3,90]
-	floor=received_values[0]
-	room=received_values[1]
-	bed_no=received_values[2]
-	percentage=received_values[3]
+	#The received_values list will be now like this [devive_id,percentage] e.g. [pat0001,90]
+	device_id=received_values[0]
+	percentage=received_values[1]
 
-	if patient.objects.filter(floor=floor,room=room,bed_no=bed_no):
-		received_ID= patient.objects.filter(floor=floor,room=room,bed_no=bed_no)
+	STATUS = patient.objects.filter(device_id=device_id).status
+
+	if patient.objects.filter(device_id=device_id):
+		received_ID= patient.objects.filter(device_id=device_id)
 		received_ID.update(percentage=percentage)
-		return HttpResponse('Data successfully updated')
+		return HttpResponse(STATUS)
 	else:
-		patient.objects.create(floor=floor,room=room,bed_no=bed_no,percentage=percentage)
-		return HttpResponse('Data successfully created')
+		return HttpResponse('This Device is not in Database!!!')

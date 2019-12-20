@@ -76,6 +76,16 @@ def ajaxhomeroomdata(request):
 				  	"floors":floors(),
 				  	"critical_value":20})
 
+def ajaxstatus(request):
+	if request.method == 'GET':
+		received_device = request.GET.get('sent_device')
+		received_status = request.GET.get('sent_status')
+
+		received_ID= patient.objects.filter(device_id=received_device)
+		received_ID.update(status=received_status)
+
+
+
 def devices(request):
 	if request.method == 'POST':
 		new_device_id = request.POST.get('device_id','')
@@ -108,7 +118,8 @@ def receive(request):
 	device_id=received_values[0]
 	percentage=received_values[1]
 
-	STATUS = patient.objects.filter(device_id=device_id).status
+	
+	STATUS = patient.objects.get(device_id=device_id).status
 
 	if patient.objects.filter(device_id=device_id):
 		received_ID= patient.objects.filter(device_id=device_id)
@@ -116,3 +127,4 @@ def receive(request):
 		return HttpResponse(STATUS)
 	else:
 		return HttpResponse('This Device is not in Database!!!')
+	

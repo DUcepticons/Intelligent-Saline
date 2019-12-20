@@ -15,7 +15,7 @@ const char *ssid = "Epitapher Thanda";  //ENTER YOUR WIFI SETTINGS
 const char *password = "Qawsedrf";
 
 //Web/Server address to read/write from 
-const char *host = "192.168.0.12";  
+const char *host = "192.168.0.8";  
 
 //=======================================================================
 //                    Power on setup
@@ -62,8 +62,8 @@ void loop() {
   //GET Data
   
   sendPercentage-- ; 
-  Link = "http://192.168.0.12:8000/receive/";
-  String postData = "1,1,5," + String(sendPercentage);
+  Link = "http://192.168.0.8:8000/receive/";
+  String postData = "PAT00001," + String(sendPercentage);
   Serial.print(Link);
   http.begin(Link);     //Specify request destination
   

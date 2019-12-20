@@ -23,6 +23,7 @@ urlpatterns = [
     path('ajax/', views.ajaxroomdata, name='ajaxroomdata'),
     path('ajaxhome/', views.ajaxhomeroomdata, name='ajaxhomeroomdata'),
     path('devices/', views.devices, name='devices'),
-    path('receive/',views.receive,name='receive')
+    path('receive/',views.receive,name='receive'),
+    path('ajaxstatus/',views.ajaxstatus,name='ajaxstatus')
     
 ]

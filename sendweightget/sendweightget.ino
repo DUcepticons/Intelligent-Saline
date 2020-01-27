@@ -1,10 +1,3 @@
- /*
- * HTTP Client GET Request
- * Copyright (c) 2018, circuits4you.com
- * All rights reserved.
- * https://circuits4you.com 
- * Connects to WiFi HotSpot. */
-
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h> 
 #include <ESP8266WebServer.h>
@@ -12,15 +5,20 @@
 #include <HX711.h>
 
 /* Set these to your desired credentials. */
-const char *ssid = "Niloy";  //ENTER YOUR WIFI SETTINGS
-const char *password = "1q2w3e4r5t6Y";
+const char *ssid = "Westeros";  //ENTER YOUR WIFI SETTINGS
+const char *password = "webpass321";
 
 //Web/Server address to read/write from 
-const char *host = "192.168.0.12";  
+const char *host = "192.168.0.10";  
 
-// Scale Settings
-const int SCALE_DOUT_PIN = D5;
-const int SCALE_SCK_PIN = D6;
+#define critical_value  20
+const int SCALE_DOUT_PIN = D6;
+const int SCALE_SCK_PIN = D5;
+
+const int Buzzer = D8;
+const int LED = D7;
+
+int flag = 0;
 
 HX711 scale(SCALE_DOUT_PIN, SCALE_SCK_PIN);
 
@@ -29,7 +27,17 @@ HX711 scale(SCALE_DOUT_PIN, SCALE_SCK_PIN);
 //=======================================================================
 
 void setup() {
+  scale.set_scale(45);// <- set here calibration factor!!!
+  scale.tare();
+  
+  pinMode(Buzzer,OUTPUT);
+  pinMode(LED,OUTPUT);
+  digitalWrite(Buzzer,HIGH);
+  digitalWrite(LED,HIGH);
   delay(1000);
+  digitalWrite(Buzzer,LOW);
+  digitalWrite(LED,LOW);
+  
   Serial.begin(115200);
   WiFi.mode(WIFI_OFF);        //Prevents reconnection issue (taking too long to connect)
   delay(1000);
@@ -41,10 +49,10 @@ void setup() {
   Serial.print("Connecting");
   // Wait for connection
   while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
+    delay(300);
+    flag ^= 1;
+    digitalWrite(Buzzer,flag);
     Serial.print(".");
-  scale.set_scale(310);// <- set here calibration factor!!!
-  scale.tare();
   }
 
   //If connection successful show IP address in serial monitor
@@ -80,8 +88,13 @@ void loop() {
   if(sendPercentage>100)
   {
     sendPercentage=100;
-  }  
-  Link = "http://192.168.0.105:8000/receive/";
+  }
+  if(sendPercentage< critical_value)digitalWrite(Buzzer,HIGH);    
+  else
+  {
+  digitalWrite(Buzzer,LOW);
+  }
+  Link = "http://192.168.0.10:8000/receive/";
   String postData = "PAT00001," + String(sendPercentage);
   Serial.print(Link);
   http.begin(Link);     //Specify request destination

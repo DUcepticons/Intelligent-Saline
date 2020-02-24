@@ -202,11 +202,11 @@ a:hover
 }
 
 input:checked + .switch-slider {
-  background-color: #94D1BE;
+  background-color: #00A86B;
 }
 
 input:focus + .switch-slider {
-  box-shadow: 0 0 1px #94D1BE;
+  box-shadow: 0 0 1px #00A86B;
 }
 
 input:checked + .switch-slider:before {

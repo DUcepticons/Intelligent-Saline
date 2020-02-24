@@ -1,11 +1,11 @@
-{% load staticfiles %}
+{% load static %}
 {% include "header.html" %}
 <body>
     <!-- <?php require("navbar.php") ?> -->
     {% include "navbar.html" %}
 
-    <div class="section dark-grey-background"  >
-        <h1 class="adv-sal-green text-center" style="margin-bottom:50px;"><span class="white">Floor 0{{floor_no}}</span> | Room 0{{room_no}}</h1>
+    <div class="section"  >
+        <h1 class="adv-sal-green text-center" style="margin-bottom:50px;"><span class="dark-grey">Floor 0{{floor_no}}</span> | Room 0{{room_no}}</h1>
         <div class="container-1200px row landing-section">
 
 
@@ -13,7 +13,7 @@
 
                 {% if i.floor == floor_no and i.room == room_no %}
                     <div class="col-lg-3 col-12  patient-column ">
-                        <div class="white-opaque-border all-border patient-column-inner">
+                        <div class="black-opaque-border dark-grey-background all-border patient-column-inner">
                             <div class="row" id="bed{{i.bed_no}}">
 
                             </div>
@@ -101,7 +101,7 @@
 
 
         </div>
-        <a href="/floor/{{floor_no}}"><h6 class="white text-center">← Get back to Floor {{floor_no}} Page</h6></a>
+        <a href="/floor/{{floor_no}}"><h6 class="dark-grey text-center">← Get back to Floor {{floor_no}} Page</h6></a>
     </div> 
 
        

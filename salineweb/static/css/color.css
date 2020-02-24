@@ -1,16 +1,16 @@
 .adv-sal-green, .adv-sal-green-hover:hover
 {
-    color:#94D1BE;
+    color:#00A86B;
 }
 
 .adv-sal-green-background, .adv-sal-green-background-hover:hover
 {
-    background-color:#94D1BE;
+    background-color:#00A86B;
 }
 
 .adv-sal-green-border,.adv-sal-green-border-hover:hover
 {
-    border: 2px solid #94D1BE;
+    border: 2px solid #00A86B;
 }
 
 .adv-sal-red, .adv-sal-red-hover:hover
@@ -34,7 +34,10 @@
     background-color:rgba(0,0,0,0.6);
 }
 
-
+.black-opaque-border,.black-opaque-border-hover:hover
+{
+    border: 2px solid rgba(0,0,0,0.5);
+}
 
 
 

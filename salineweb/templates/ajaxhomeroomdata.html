@@ -1,9 +1,9 @@
-{% load staticfiles %}
+{% load static %}
 {% for i in patients %}
 
   {% if i.percentage <= critical_value %}
   <div class="col-lg-3 col-12  patient-column ">
-    <div class="white-opaque-border all-border patient-column-inner">
+    <div class="dark-grey-background all-border patient-column-inner">
       <div class="row">
         <div class="col-9">
           <p class="white" style="margin-bottom: 0px;">Floor: <span class="adv-sal-red bold-text">0{{i.floor}}</span> Room: <span class="adv-sal-red bold-text">0{{i.room}}</span></p>

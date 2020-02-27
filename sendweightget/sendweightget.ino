@@ -5,11 +5,11 @@
 #include <HX711.h>
 
 /* Set these to your desired credentials. */
-const char *ssid = "Westeros";  //ENTER YOUR WIFI SETTINGS
-const char *password = "webpass321";
+const char *ssid = "Inan Afra";  //ENTER YOUR WIFI SETTINGS
+const char *password = "afra2017";
 
 //Web/Server address to read/write from 
-const char *host = "192.168.0.10";  
+const char *host = "192.168.0.101";  
 
 #define critical_value  20
 const int SCALE_DOUT_PIN = D6;
@@ -71,7 +71,7 @@ int sendPercentage=100;
 void loop() {
   float saline_bag_weight=1000;
   float weight = scale.get_units(1);
-  Serial.println(String(weight, 2));
+  Serial.println(String(-weight, 2));
   
   HTTPClient http;    //Declare object of class HTTPClient
 
@@ -80,7 +80,7 @@ void loop() {
 
   //GET Data
   
-  sendPercentage= (weight/saline_bag_weight)*100 ; 
+  sendPercentage= (-weight/saline_bag_weight)*100 ; 
   if(sendPercentage<0)
   {
     sendPercentage=0;
@@ -94,8 +94,8 @@ void loop() {
   {
   digitalWrite(Buzzer,LOW);
   }
-  Link = "http://192.168.0.10:8000/receive/";
-  String postData = "PAT00001," + String(sendPercentage);
+  Link = "http://192.168.0.101:8000/receive/";
+  String postData = "PAT00002," + String(sendPercentage);
   Serial.print(Link);
   http.begin(Link);     //Specify request destination
   
@@ -103,10 +103,10 @@ void loop() {
   String payload = http.getString();    //Get the response payload
 
   Serial.println(httpCode);   //Print HTTP return code
-  Serial.println(payload);    //Print request response payload
+  //Serial.println(payload);    //Print request response payload
 
   http.end();  //Close connection
   
-  delay(2000);  //GET Data at every 5 seconds
+  delay(1000);  //GET Data at every 5 seconds
 }
 //=======================================================================

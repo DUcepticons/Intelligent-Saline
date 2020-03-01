@@ -67,14 +67,21 @@ def ajaxroomdata(request):
 		ajaxObject = patient.objects.get(floor = received_floor,room=received_room,bed_no=received_bed)
 		return render(request=request,template_name="ajaxroomdata.html",
 			context={"dynamicpercentage": ajaxObject.percentage, "bed_ajax": ajaxObject.bed_no,
-					"critical_value":20 })
+					"critical_value":20, 'danger_value':10 })
 
 def ajaxhomeroomdata(request):
 	if request.method == 'GET':
 		return render(request=request,template_name="ajaxhomeroomdata.html",
 					context={"patients":patient.objects.all,
 				  	"floors":floors(),
-				  	"critical_value":20})
+				  	"danger_value":10})
+
+def ajaxcriticalroomdata(request):
+	if request.method == 'GET':
+		return render(request=request,template_name="ajaxhomeroomdata.html",
+					context={"patients":patient.objects.all,
+				  	"floors":floors(),
+				  	"critical_value":20, "danger_value":10})
 
 def ajaxstatus(request):
 	if request.method == 'GET':

@@ -28,6 +28,21 @@
     border: 2px solid #d03516;
 }
 
+.adv-sal-yellow, .adv-sal-yellow-hover:hover
+{
+    color:#e1ad01;
+}
+
+.adv-sal-yellow-background, .adv-sal-yellow-background-hover:hover
+{
+    background-color:#e1ad01;
+}
+
+.adv-sal-yellow-border,.adv-sal-yellow-border-hover:hover
+{
+    border: 2px solid #e1ad01;
+}
+
 
 .black-overlay:before
 {

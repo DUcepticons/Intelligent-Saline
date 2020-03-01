@@ -1,7 +1,7 @@
 {% load static %}
 {% for i in patients %}
 
-  {% if i.percentage <= critical_value %}
+  {% if i.percentage <= danger_value %}
   <div class="col-lg-3 col-12  patient-column ">
     <div class="light-grey-background all-border patient-column-inner">
       <div class="row">

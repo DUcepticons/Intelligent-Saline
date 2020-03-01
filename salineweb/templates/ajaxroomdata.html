@@ -3,16 +3,21 @@
 	<p class="dark-grey" style="margin-bottom: 0px;">Bed no: </p>
 	<p class="dark-grey large-text bold-text">0{{bed_ajax}}</p>
 	<p class="dark-grey " style="margin-bottom: 0px;">Remaining Saline:</p>
-	{% if dynamicpercentage <= critical_value %}
+	{% if dynamicpercentage <= danger_value %}
 		<p class="adv-sal-red large-text bold-text">{{dynamicpercentage}}%</p>
+	{% elif dynamicpercentage <= critical_value and dynamicpercentage > danger_value %}
+		<p class="adv-sal-yellow large-text bold-text">{{dynamicpercentage}}%</p>
 	{% else %}
 		<p class="adv-sal-green large-text bold-text">{{dynamicpercentage}}%</p>
 	{% endif %}	
 </div>
 <div class="col-3">
-	{% if dynamicpercentage <= critical_value %}
+	{% if dynamicpercentage <= danger_value %}
 	<div class="progress adv-sal-red-border" style="height: 150px;width:25px;border-radius:50px;" >
 		<div class="progress-bar adv-sal-red-background" role="progressbar" style="height:{{dynamicpercentage}}%;top:calc(100% - {{dynamicpercentage}}% );" aria-valuemin="0" aria-valuemax="100">
+	{% elif dynamicpercentage <= critical_value and dynamicpercentage > danger_value  %}
+	<div class="progress adv-sal-yellow-border" style="height: 150px;width:25px;border-radius:50px;" >
+		<div class="progress-bar adv-sal-yellow-background" role="progressbar" style="height:{{dynamicpercentage}}%;top:calc(100% - {{dynamicpercentage}}% );" aria-valuemin="0" aria-valuemax="100">
 	{% else %}
 	<div class="progress adv-sal-green-border" style="height: 150px;width:25px;border-radius:50px;" >
 		<div class="progress-bar adv-sal-green-background" role="progressbar" style="height:{{dynamicpercentage}}%;top:calc(100% - {{dynamicpercentage}}% );"  aria-valuemin="0" aria-valuemax="100">

@@ -1,5 +1,5 @@
 <style>
-/* Icon 1 */
+/* Mobile X menu */
 
 .animated-icon3 {
 width: 30px;
@@ -100,6 +100,54 @@ $(document).ready(function () {
 
 </script>
 
+<!-- Submenu in navbar -->
+<style>
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu a::after {
+  transform: rotate(-90deg);
+  position: absolute;
+  right: 6px;
+  top: .8em;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-left: .1rem;
+  margin-right: .1rem;
+}
+
+@media(max-width: 768px)
+{
+  .site-title-container
+  {
+    height:70px;
+  }
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+    if (!$(this).next().hasClass('show')) {
+      $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+    }
+    var $subMenu = $(this).next(".dropdown-menu");
+    $subMenu.toggleClass('show');
+
+
+    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+      $('.dropdown-submenu .show').removeClass("show");
+    });
+
+
+    return false;
+  });
+});
+</script>
 <nav class="navbar navbar-expand-lg sticky-top adv-sal-green-background">
 
   <div class="row" style="width:100%;">
@@ -117,17 +165,26 @@ $(document).ready(function () {
             <a class="nav-link dark-grey bold-text dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Select Floor
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li class="dropdown-item"><a href="/index.html">Danger patients</a></li>
+              <li class="dropdown-item"><a href="/criticalpatient.html">Critical Patients</a></li>
               {% for number in floors %}
-              <a class="dropdown-item" href="/floor/{{number}}">Floor{{number}}</a>
-              {% endfor %}
+              <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Floor {{number}}</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/floor/{{number}}">Whole floor</a></li>
+                  <li><a class="dropdown-item" href="#">Room 1</a></li>
+                  <li><a class="dropdown-item" href="#">Room 2</a></li>             
+                </ul>
+              </li>
               
-            </div>
+              {% endfor %}
+
+            </ul>
           </li>
         </ul>
       </div>
     </div>
-    <div class="col-10 col-lg-6 ">
+    <div class="col-10 col-lg-6 site-title-container" >
       <h4 class="dark-grey bold-text text-right text-center" style="margin-bottom: 0px;margin-top: 7px;">Intravenous Saline Monitoring</p>
     </div>
   </div>

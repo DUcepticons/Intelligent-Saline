@@ -1,0 +1,31 @@
+{% load static %}
+{% for i in patients %}
+
+  {% if i.percentage <= danger_value %}
+  <div class="col-lg-3 col-12  patient-column ">
+    <div class="light-grey-background all-border patient-column-inner">
+      <div class="row">
+        <div class="col-9">
+          <p class="dark-grey" style="margin-bottom: 0px;">Floor: <span class="adv-sal-red bold-text">0{{i.floor}}</span> Room: <span class="adv-sal-red bold-text">0{{i.room}}</span></p>
+          <p class="dark-grey" style="margin-bottom: 0px;">Bed no: </p>
+          <p class="dark-grey large-text bold-text">0{{i.bed_no}}</p>
+          <p class="dark-grey " style="margin-bottom: 0px;">Remaining Saline:</p>
+            <p class="adv-sal-red large-text bold-text">{{i.percentage}}%</p>
+        </div>
+        <div class="col-3">
+          <div class="progress adv-sal-red-border" style="height: 150px;width:25px;border-radius:50px;" >
+            <div class="progress-bar adv-sal-red-background" role="progressbar" style="height:{{i.percentage}}%;top:calc(100% - {{i.percentage}}% );" aria-valuemin="0" aria-valuemax="100">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <p class="adv-sal-red text-center">For On/Off control visit page.</p>
+      
+    </div>
+  </div>
+
+  {% endif %}
+
+{% endfor %}

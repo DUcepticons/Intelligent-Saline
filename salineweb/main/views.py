@@ -34,9 +34,25 @@ def homepage(request):
 				  "floors":floors(),
 				  "critical_value":20})
 
+def criticalpatient(request):
+	return render(request=request,template_name="criticalpatient.html",
+				  context={"patients":patient.objects.all,
+				  "floors":floors(),
+				  "critical_value":20})
+
+
+def dangerpatient(request):
+	#return HttpResponse('<h1>Hi Akash</h1>')
+	#a= patient(floor='1',room='1',bed_no='8',percentage='45')
+	return render(request=request,template_name="dangerpatient.html",
+				  context={"patients":patient.objects.all,
+				  "floors":floors(),
+				  "critical_value":10})
+
+
 def floor(request , floor_no=1):
 
-	return render(request=request,template_name="floor.html",
+	return render(request=request,template_name="floorhome.html",
 				  context={"patients":patient.objects.all,
 				  "floors":floors(),
 				  "floor_no":floor_no,
@@ -51,6 +67,7 @@ def room(request ,floor_no=1, room_no=1):
 				  context={"patients":patient.objects.all,
 				  "floors":floors(),
 				  "floor_no":floor_no,
+				  "rooms_under_Floor":rooms_under_Floor(floor_no),
 				  "room_no":room_no})
 '''
 def room2(request):
@@ -74,14 +91,21 @@ def ajaxhomeroomdata(request):
 		return render(request=request,template_name="ajaxhomeroomdata.html",
 					context={"patients":patient.objects.all,
 				  	"floors":floors(),
-				  	"danger_value":10})
+				  	"danger_value":20})
 
 def ajaxcriticalroomdata(request):
 	if request.method == 'GET':
-		return render(request=request,template_name="ajaxhomeroomdata.html",
+		return render(request=request,template_name="ajaxcriticalroomdata.html",
 					context={"patients":patient.objects.all,
 				  	"floors":floors(),
 				  	"critical_value":20, "danger_value":10})
+
+def ajaxdangerroomdata(request):
+	if request.method == 'GET':
+		return render(request=request,template_name="ajaxdangerroomdata.html",
+					context={"patients":patient.objects.all,
+				  	"floors":floors(),
+				  	"danger_value":10})
 
 def ajaxstatus(request):
 	if request.method == 'GET':

@@ -166,21 +166,25 @@ $(document).ready(function () {
               Select Floor
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li class="dropdown-item"><a href="/index.html">Danger patients</a></li>
-              <li class="dropdown-item"><a href="/criticalpatient.html">Critical Patients</a></li>
+              <li class="dropdown-item"><a href="/dangerpatient/">Danger patients</a></li>
+              <li class="dropdown-item"><a href="/criticalpatient/">Critical Patients</a></li>
               {% for number in floors %}
-              <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Floor {{number}}</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/floor/{{number}}">Whole floor</a></li>
-                  <li><a class="dropdown-item" href="#">Room 1</a></li>
-                  <li><a class="dropdown-item" href="#">Room 2</a></li>             
-                </ul>
-              </li>
-              
+                      <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Floor {{number}}</a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="/floor/{{number}}">Whole floor</a></li>
+                            {%for room_number in rooms_under_Floor %}
+                              <li><a class="dropdown-item" href="/floor/{{floor_no}}/room/{{room_number.0}}">Room 0{{room_number.0}}</a></li> 
+                            {% endfor %}            
+                        </ul>
+                      </li>
+                    
               {% endfor %}
-
+            
             </ul>
           </li>
+          <li class="nav-item active">
+              <p><a href="{% url 'logout' %}">logout</a></p>
+            </li>
         </ul>
       </div>
     </div>

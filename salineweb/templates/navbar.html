@@ -1,3 +1,4 @@
+{% load static %}
 <style>
 /* Mobile X menu */
 
@@ -168,13 +169,20 @@ $(document).ready(function () {
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li class="dropdown-item"><a href="/dangerpatient/">Danger patients</a></li>
               <li class="dropdown-item"><a href="/criticalpatient/">Critical Patients</a></li>
+
+
               {% for number in floors %}
                       <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Floor {{number}}</a>
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="/floor/{{number}}">Whole floor</a></li>
-                            {%for room_number in rooms_under_Floor %}
-                              <li><a class="dropdown-item" href="/floor/{{floor_no}}/room/{{room_number.0}}">Room 0{{room_number.0}}</a></li> 
-                            {% endfor %}            
+
+                            {%for floor,room in rooms.items %}
+                              {% if floor == number%}
+                                  {% for room_number in room %}
+                                    <li><a class="dropdown-item" href="/floor/{{floor}}/room/{{room_number.0}}">Room 0{{room_number.0}}</a></li> 
+                                  {% endfor %}    
+                              {% endif %}
+                            {% endfor %}             
                         </ul>
                       </li>
                     

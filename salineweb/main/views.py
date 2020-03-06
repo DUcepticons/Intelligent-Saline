@@ -24,6 +24,12 @@ def beds_under_Room(floor_no,room_no):        #for floor page
 			all_beds.append(p.bed_no)
 	return all_beds
 
+def all_rooms():
+	all_floors = floors()
+	rooms = {}
+	for floor in all_floors:
+		rooms[floor] = rooms_under_Floor(floor)
+	return rooms
 
 
 def homepage(request):
@@ -32,12 +38,14 @@ def homepage(request):
 	return render(request=request,template_name="index.html",
 				  context={"patients":patient.objects.all,
 				  "floors":floors(),
+				  "rooms":all_rooms(),
 				  "critical_value":20})
 
 def criticalpatient(request):
 	return render(request=request,template_name="criticalpatient.html",
 				  context={"patients":patient.objects.all,
 				  "floors":floors(),
+				  "rooms":all_rooms(),
 				  "critical_value":20})
 
 
@@ -47,6 +55,7 @@ def dangerpatient(request):
 	return render(request=request,template_name="dangerpatient.html",
 				  context={"patients":patient.objects.all,
 				  "floors":floors(),
+				  "rooms":all_rooms(),
 				  "critical_value":10})
 
 
@@ -56,7 +65,7 @@ def floor(request , floor_no=1):
 				  context={"patients":patient.objects.all,
 				  "floors":floors(),
 				  "floor_no":floor_no,
-				  #"room_no":room_no,
+				  "rooms":all_rooms(),
 				  "rooms_under_Floor":rooms_under_Floor(floor_no),
 				  "patient_count":patient.objects.filter(floor = floor_no).count()})
 
@@ -68,6 +77,7 @@ def room(request ,floor_no=1, room_no=1):
 				  "floors":floors(),
 				  "floor_no":floor_no,
 				  "rooms_under_Floor":rooms_under_Floor(floor_no),
+				  "rooms":all_rooms(),
 				  "room_no":room_no})
 '''
 def room2(request):
@@ -85,6 +95,7 @@ def ajaxroomdata(request):
 		return render(request=request,template_name="ajaxroomdata.html",
 			context={"dynamicpercentage": ajaxObject.percentage, "bed_ajax": ajaxObject.bed_no,
 					"critical_value":20, 'danger_value':10 })
+
 
 def ajaxhomeroomdata(request):
 	if request.method == 'GET':

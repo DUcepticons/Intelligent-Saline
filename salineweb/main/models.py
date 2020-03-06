@@ -8,6 +8,7 @@ class patient(models.Model):
 	percentage = models.IntegerField(default=0)
 	device_id =  models.CharField(max_length=50, null=True, blank=True)
 	status = models.IntegerField(default = 0)
+	buzzer_status = models.IntegerField(default = 1)
 
 	def __str__(self):
 		return self.device_id

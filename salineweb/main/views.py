@@ -106,7 +106,7 @@ def ajaxhomeroomdata(request):
 		return render(request=request,template_name="ajaxhomeroomdata.html",
 					context={"patients":patient.objects.all,
 				  	"floors":floors(),
-				  	"danger_value":20})
+				  	"danger_value":10, "critical_value":20})
 
 def ajaxcriticalroomdata(request):
 	if request.method == 'GET':

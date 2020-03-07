@@ -2,8 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from .models import patient
 from numpy import unique
+
+
+
 
 def floors():                         #for nav bar floors
 	all_floors = []
@@ -31,7 +35,7 @@ def all_rooms():
 		rooms[floor] = rooms_under_Floor(floor)
 	return rooms
 
-
+@login_required
 def homepage(request):
 	#return HttpResponse('<h1>Hi Akash</h1>')
 	#a= patient(floor='1',room='1',bed_no='8',percentage='45')
@@ -40,7 +44,7 @@ def homepage(request):
 				  "floors":floors(),
 				  "rooms":all_rooms(),
 				  "critical_value":20})
-
+@login_required
 def criticalpatient(request):
 	return render(request=request,template_name="criticalpatient.html",
 				  context={"patients":patient.objects.all,
@@ -48,7 +52,7 @@ def criticalpatient(request):
 				  "rooms":all_rooms(),
 				  "critical_value":20})
 
-
+@login_required
 def dangerpatient(request):
 	#return HttpResponse('<h1>Hi Akash</h1>')
 	#a= patient(floor='1',room='1',bed_no='8',percentage='45')
@@ -58,7 +62,7 @@ def dangerpatient(request):
 				  "rooms":all_rooms(),
 				  "critical_value":10})
 
-
+@login_required
 def floor(request , floor_no=1):
 
 	return render(request=request,template_name="floorhome.html",
@@ -69,7 +73,7 @@ def floor(request , floor_no=1):
 				  "rooms_under_Floor":rooms_under_Floor(floor_no),
 				  "patient_count":patient.objects.filter(floor = floor_no).count()})
 
-
+@login_required
 def room(request ,floor_no=1, room_no=1):
 
 	return render(request=request,template_name="room.html",

@@ -20,6 +20,7 @@ app_name= 'main'
 urlpatterns = [
     path('',views.homepage, name='homepage'),
     path('floor/<int:floor_no>/',views.floor,name='floor'),
+    path('floor/<int:floor_no>/below<int:percentage>/',views.floorquery,name='floorquery'),
     path('floor/<int:floor_no>/room/<int:room_no>/',views.room,name='room'),
     path('criticalpatient/', views.criticalpatient, name='criticalpatients'),
     path('dangerpatient/', views.dangerpatient, name='dangerpatients'),

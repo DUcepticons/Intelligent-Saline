@@ -30,6 +30,6 @@ urlpatterns = [
     path('ajaxdanger/', views.ajaxdangerroomdata, name='ajaxdangerroomdata'),
     path('devices/', views.devices, name='devices'),
     path('receive/',views.receive,name='receive'),
-    path('ajaxstatus/',views.ajaxstatus,name='ajaxstatus')
-    
+    path('ajaxstatus/',views.ajaxstatus,name='ajaxstatus'),
+    path('<device_id>/',views.mute,name='mute'),
 ]

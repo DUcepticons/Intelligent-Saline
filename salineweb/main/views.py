@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.template import Context, loader
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
@@ -180,7 +180,9 @@ def receive(request):
 	percentage=received_values[1]
 
 	
-	STATUS = patient.objects.get(device_id=device_id).status
+	STATUS = patient.objects.get(device_id=device_id).buzzer_status
+	received_ID= patient.objects.filter(device_id=device_id)
+	received_ID.update(buzzer_status = 5)
 
 	if patient.objects.filter(device_id=device_id):
 		received_ID= patient.objects.filter(device_id=device_id)
@@ -189,3 +191,10 @@ def receive(request):
 	else:
 		return HttpResponse('This Device is not in Database!!!')
 	
+@csrf_exempt
+def mute(request, device_id = 'PAT00001'):
+	
+	new_device_id = request.POST.get('device_id','')
+	received_ID= patient.objects.filter(device_id=device_id)
+	received_ID.update(buzzer_status = 6)
+	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

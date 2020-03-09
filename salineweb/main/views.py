@@ -76,14 +76,15 @@ def floor(request , floor_no=1):
 
 @login_required
 def floorquery(request , floor_no=1,percentage = 100):
-
+	if request.method == 'POST':
+		percentage_value = int(request.POST.get('percentage_value',''))
 	return render(request=request,template_name="floorhome.html",
 				  context={"patients":patient.objects.all,
 				  "floors":floors(),
 				  "floor_no":floor_no,
 				  "rooms":all_rooms(),
 				  "rooms_under_Floor":rooms_under_Floor(floor_no),
-				  "percentage":percentage,
+				  "percentage":percentage_value,
 				  "patient_count":patient.objects.filter(floor = floor_no).count()})
 
 

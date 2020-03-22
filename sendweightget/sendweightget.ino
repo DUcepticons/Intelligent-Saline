@@ -19,6 +19,8 @@ const int Buzzer = D8;
 const int LED = D7;
 
 int flag = 0;
+float saline_bag_weight=1000;
+float weight = 0;
 
 HX711 scale(SCALE_DOUT_PIN, SCALE_SCK_PIN);
 
@@ -61,6 +63,36 @@ void setup() {
   Serial.println(ssid);
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());  //IP address assigned to your ESP
+  saline_bag_weight=1000;
+  weight = scale.get_units(1);
+  float new_weight = 0;
+  int not_ok = 1;
+  int count = 0;
+  
+  while(not_ok)
+  {
+    new_weight = scale.get_units(1);
+    if(abs(new_weight-weight) <10 && count>=100)
+    {
+      if(new_weight > 300 && new_weight < 600)
+      {
+          saline_bag_weight = 500;
+          not_ok = 0;
+          break;
+      }
+      else if(new_weight > 700 && new_weight < 1100)
+      {
+          saline_bag_weight = 1000;
+          not_ok = 0;
+          break;
+      }
+    }
+
+    weight = new_weight;
+    count++;
+  }
+  
+  
 }
 
 //=======================================================================
@@ -69,8 +101,9 @@ void setup() {
 int sendPercentage=100;
 
 void loop() {
-  float saline_bag_weight=1000;
-  float weight = scale.get_units(1);
+
+  weight = scale.get_units(1);
+
   Serial.println(String(-weight, 2));
   
   HTTPClient http;    //Declare object of class HTTPClient

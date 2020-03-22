@@ -21,21 +21,21 @@
 			<form style="max-width:600px;margin-bottom:30px;" class="padding-15px-mobile" action="/devices/" method="POST"> {% csrf_token %}
 				<div class="form-group">
 				    <label for="device">Device ID</label>
-				    <input type="text" class="form-control" name="device_id" style="margin-bottom: 20px;">
+				    <input type="text" class="form-control" name="device_id" style="margin-bottom: 20px;" id="input_device">
 				    <div class="row no-margin" style="margin-bottom: 20px;">
 				    	<div class="col-4 no-padding">
 						    
 						    <label for="floor">Floor</label>
-						    <input type="number" class="form-control" name="floor" >
+						    <input type="number" class="form-control" name="floor" id="input_floor">
 						</div>
 				    	<div class="col-4">
 					    
 						    <label for="room">Room</label>
-						    <input type="number" class="form-control" name="room" >
+						    <input type="number" class="form-control" name="room" id="input_room">
 						</div>
 				    	<div class="col-4 no-padding">
 						    <label for="bed">Bed</label>
-						    <input type="number" class="form-control" name="bed_no" >
+						    <input type="number" class="form-control" name="bed_no" id="input_bed_no">
 						</div>
 
 					</div>
@@ -51,8 +51,9 @@
 		                <th>Floor</th>
 		                <th>Room</th>
 		                <th>Bed</th>
-		                
+		                <th>Edit</th>
 		                <th>Delete</th>
+		                
 		            </tr>
 	        	</thead>
 	        	<tbody>
@@ -62,13 +63,31 @@
 				                <td>{{p.device_id}}</td>
 				                <td>{{p.floor}}</td>
 				                <td>{{p.room}}</td>
-				                <td>{{p.bed_no}}</td>				                
+				                <td>{{p.bed_no}}</td>
+				                <td>
+				                	
+				                		<button type="submit" id="edit{{p.device_id}}" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Edit</button>
+				                	
+				                </td>				                
 				                <td>
 				                	<form action="/devices/" method="POST"> {% csrf_token %}
 				                		<button type="submit" onclick="alert('You are about to DELETE a device!!!')" name="delete" value={{p.device_id}} class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border">Delete</button>
 				                	</form>
 				                </td>
 							</tr>
+
+							<script type="text/javascript">
+								$(document).ready(function() {
+								    $('#edit{{p.device_id}}').on( "click", function() {
+									    $( "#input_device" ).val("{{p.device_id}}");
+										$( "#input_floor" ).val({{p.floor}});
+										$( "#input_room" ).val({{p.room}});
+										$( "#input_bed_no" ).val({{p.bed_no}});
+									});
+								} );
+
+
+							</script>
 			                        
 			            {% endfor %}
 
@@ -90,35 +109,11 @@
 			$(document).ready(function() {
 			    $('#devices-table').DataTable();
 			} );
+
+
 			</script>
 
-<!-- 			<h2 class="bold-text padding-15px-mobile" style="margin-top:30px;">Edit Device PAT-000001</h2>
-			<form style="max-width:600px;" class="padding-15px-mobile">
-				
-				<div class="form-group">
-				    <label for="device">Device ID</label>
-				    <input type="text" class="form-control" id="device" style="margin-bottom: 20px;" value="PAT-000001" disabled>
-				    <div class="row no-margin" style="margin-bottom: 20px;">
-				    	<div class="col-4 no-padding">
-						    
-						    <label for="floor">Floor</label>
-						    <input type="number" class="form-control" id="floor" value="3">
-						</div>
-				    	<div class="col-4">
-					    
-						    <label for="room">Room</label>
-						    <input type="number" class="form-control" id="room" value="3">
-						</div>
-				    	<div class="col-4 no-padding">
-						    <label for="bed">Bed</label>
-						    <input type="number" class="form-control" id="bed" value="3">
-						</div>
 
-					</div>
-					<button type="submit" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Reconnect Device</button>
-				</div>
-
-			</form> -->
 		</div>
 	</div>
 </body>

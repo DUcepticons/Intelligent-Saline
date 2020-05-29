@@ -1,0 +1,9 @@
+1 .
+Arduino >> File >> Preferences
+In additional board manager URLs pase : http://arduino.esp8266.com/stable/package_esp8266com_index.json
+
+2.
+Tools >> Board >> Board Manager >> search "esp8266" >> install (suitable one)
+
+3.
+Tools >> Select Board >> NodeMCU 1.0

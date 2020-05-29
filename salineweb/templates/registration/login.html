@@ -6,14 +6,16 @@
 
 {% block content %}
 {% include "../header.html" %}
-<div class="container-960px " style="height:100vh;align-items: center;display: flex;">
-	<div class="text-center light-grey-background" style="width:100%;padding: 50px;">
-		<h2>Login</h2>
-			<form method="post">
-				{% csrf_token %}
-				{{ form.as_p }}
-			<button type="submit" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Login</button>
-		</form>
+<div class="section" style="padding:0px;" >
+	<div class="container-960px " style="height:100vh;align-items: center;display: flex;">
+		<div class="text-center light-grey-background" style="width:100%;padding: 50px;">
+			<h2>Login</h2>
+				<form method="post">
+					{% csrf_token %}
+					{{ form.as_p }}
+				<button type="submit" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border">Login</button>
+			</form>
+		</div>
 	</div>
 </div>
 {% endblock %}

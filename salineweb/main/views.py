@@ -182,7 +182,7 @@ def receive(request):
 	
 	STATUS = patient.objects.get(device_id=device_id).buzzer_status
 	received_ID= patient.objects.filter(device_id=device_id)
-	received_ID.update(buzzer_status = 5)
+	received_ID.update(buzzer_status = 0)
 
 	if patient.objects.filter(device_id=device_id):
 		received_ID= patient.objects.filter(device_id=device_id)
@@ -196,5 +196,5 @@ def mute(request, device_id = 'PAT00001'):
 	
 	new_device_id = request.POST.get('device_id','')
 	received_ID= patient.objects.filter(device_id=device_id)
-	received_ID.update(buzzer_status = 6)
+	received_ID.update(buzzer_status = 1)
 	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

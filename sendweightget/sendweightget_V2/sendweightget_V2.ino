@@ -4,7 +4,7 @@
 #include <ESP8266HTTPClient.h>
 #include <HX711.h>
 
-String DEV_ID = "PAT00001";                                   //Input the device id here
+String DEV_ID = "DEV00001";                                   //Input the device id here
 const char *ssid = "Westeros";                                 //ENTER YOUR WIFI SETTINGS
 const char *password = "webpass123";
 

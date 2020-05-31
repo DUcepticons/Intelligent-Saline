@@ -87,16 +87,29 @@ def floorquery(request , floor_no=1,percentage = 100):
 				  "percentage":percentage_value,
 				  "patient_count":patient.objects.filter(floor = floor_no).count()})
 
-
 @login_required
-def room(request ,floor_no=1, room_no=1):
-
+def roomquery(request , floor_no=1, room_no=1, percentage = 100):
+	if request.method == 'POST':
+		percentage_value = int(request.POST.get('percentage_value',''))
 	return render(request=request,template_name="room.html",
 				  context={"patients":patient.objects.all,
 				  "floors":floors(),
 				  "floor_no":floor_no,
 				  "rooms_under_Floor":rooms_under_Floor(floor_no),
 				  "rooms":all_rooms(),
+				  "percentage":percentage_value,
+				  "room_no":room_no})
+
+@login_required
+def room(request ,floor_no=1, room_no=1, percentage = 100):
+	
+	return render(request=request,template_name="room.html",
+				  context={"patients":patient.objects.all,
+				  "floors":floors(),
+				  "floor_no":floor_no,
+				  "rooms_under_Floor":rooms_under_Floor(floor_no),
+				  "rooms":all_rooms(),
+				  "percentage":100,
 				  "room_no":room_no})
 '''
 def room2(request):

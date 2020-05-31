@@ -4,11 +4,11 @@
 const int SCALE_DOUT_PIN = D6;
 const int SCALE_SCK_PIN = D5;
 
-HX711 scale;
+HX711 scale(SCALE_DOUT_PIN, SCALE_SCK_PIN);
 
 void setup() {
   Serial.begin(115200);
-  scale.begin(SCALE_DOUT_PIN, SCALE_SCK_PIN);
+  //scale.begin(SCALE_DOUT_PIN, SCALE_SCK_PIN);
   scale.set_scale(45);// <- set here calibration factor!!!  45 works well
   scale.tare();
 }

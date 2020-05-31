@@ -198,20 +198,20 @@ previous_sendPercentage=sendPercentage;
   int button = digitalRead(Push_button);    // it gives 0 for press, 1 otherwise
   if (button == 0)Serial.println("button pressed");
   if((sendPercentage <= critical_value) && (button == 0 || payload == "1"))push_button_state = 1;   //when percentage under critical and mute button pressed
-  //Serial.println(push_button_state);
+  //Serial.println(push_button_state);                                                              //payload returns 1 if mute button pressed
   Serial.println("\n\n");
 
   
 //critical and very_critical saline level indication
-  if (push_button_state == 0 || payload == "0")
+  if (push_button_state == 0)
   {
     count++;
-    if(sendPercentage <= critical_value  && very_critical_value < sendPercentage  && count>  10)
+    if(sendPercentage <= critical_value  && very_critical_value < sendPercentage  && count>  8)
       {
         buzzer_indication(1,500);
         count = 0;
       }
-    else if(sendPercentage <= very_critical_value  && count>  6)
+    else if(sendPercentage <= very_critical_value  && count>  4)
       {
         buzzer_indication(2,250);
         count = 0;
@@ -241,8 +241,10 @@ void buzzer_indication(int times, int Delay){
   for( int i=0;i<times;i++)
   {
     digitalWrite(Buzzer,HIGH);
+    digitalWrite(LED,HIGH);
     delay(Delay);
     digitalWrite(Buzzer,LOW );
+    digitalWrite(LED,LOW );
     delay(Delay);
   }
 }

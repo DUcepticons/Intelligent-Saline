@@ -22,6 +22,11 @@
 				<div class="form-group">
 				    <label for="device">Device ID</label>
 				    <input type="text" class="form-control" name="device_id" style="margin-bottom: 20px;" id="input_device">
+
+				    
+				    <label for="patient">Patient ID</label>
+				    <input type="text" class="form-control" name="patient_id" style="margin-bottom: 20px;" id="input_patient">
+				    
 				    <div class="row no-margin" style="margin-bottom: 20px;">
 				    	<div class="col-4 no-padding">
 						    
@@ -48,6 +53,7 @@
 				<thead>
 		            <tr>
 		                <th>Device ID</th>
+		                <th>Patient ID</th>
 		                <th>Floor</th>
 		                <th>Room</th>
 		                <th>Bed</th>
@@ -61,6 +67,7 @@
 		                {%for p in patients %}
 		                	<tr>
 				                <td>{{p.device_id}}</td>
+				                <td>{{p.patient_id}}</td>
 				                <td>{{p.floor}}</td>
 				                <td>{{p.room}}</td>
 				                <td>{{p.bed_no}}</td>
@@ -80,6 +87,7 @@
 								$(document).ready(function() {
 								    $('#edit{{p.device_id}}').on( "click", function() {
 									    $( "#input_device" ).val("{{p.device_id}}");
+									    $( "#input_patient" ).val("{{p.patient_id}}");
 										$( "#input_floor" ).val({{p.floor}});
 										$( "#input_room" ).val({{p.room}});
 										$( "#input_bed_no" ).val({{p.bed_no}});

@@ -163,20 +163,21 @@ def ajaxstatus(request):
 def devices(request):
 	if request.method == 'POST':
 		new_device_id = request.POST.get('device_id','')
+		new_patient_id = request.POST.get('patient_id','')
 		new_floor = request.POST.get('floor','')
 		new_room = request.POST.get('room','')
 		new_bed_no = request.POST.get('bed_no','')
 
 		device_to_delete = request.POST.get('delete','')
 
-		if new_device_id != "" and new_floor != "" and new_room != "" and new_bed_no != "": #update or create will work only if all fields are filled
+		if new_device_id != "" and new_floor != "" and new_room != "" and new_bed_no != "" and new_patient_id != "": #update or create will work only if all fields are filled
 
 			if patient.objects.filter(device_id=new_device_id):
 				received_ID= patient.objects.filter(device_id=new_device_id)
-				received_ID.update(floor=new_floor,room=new_room,bed_no=new_bed_no)
+				received_ID.update(floor=new_floor,room=new_room,bed_no=new_bed_no, patient_id=new_patient_id)
 				#return HttpResponse('Data successfully updated')
 			else:
-				patient.objects.create(device_id=new_device_id, floor=new_floor,room=new_room,bed_no=new_bed_no)
+				patient.objects.create(device_id=new_device_id, patient_id=new_patient_id, floor=new_floor,room=new_room,bed_no=new_bed_no)
 				#return HttpResponse('Data successfully created')
 		elif device_to_delete !="": #Delete operation block
 			patient.objects.filter(device_id=device_to_delete).delete()

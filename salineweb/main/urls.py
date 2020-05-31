@@ -21,6 +21,7 @@ urlpatterns = [
     path('',views.homepage, name='homepage'),
     path('floor/<int:floor_no>/',views.floor,name='floor'),
     path('floor/<int:floor_no>/below',views.floorquery,name='floorquery'),
+    path('floor/<int:floor_no>/room/<int:room_no>/below',views.roomquery,name='roomquery'),
     path('floor/<int:floor_no>/room/<int:room_no>/',views.room,name='room'),
     path('criticalpatient/', views.criticalpatient, name='criticalpatients'),
     path('verycriticalpatient/', views.dangerpatient, name='dangerpatients'),

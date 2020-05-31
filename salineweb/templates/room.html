@@ -6,11 +6,15 @@
 
     <div class="section"  >
         <h1 class="adv-sal-green text-center" style="margin-bottom:50px;"><span class="dark-grey">Floor 0{{floor_no}}</span> | Room 0{{room_no}}</h1>
+        <form class="text-center" action="/floor/{{floor_no}}/room/{{room_no}}/below" style="width: 100%;" method="POST"> {% csrf_token %}
+            <input type="number" class="form-control horizontal-middle"  placeholder="Patients under %" style="width:100%;max-width: 500px;margin-bottom:20px;" name="percentage_value">
+            <button type="submit" class="btn adv-sal-green-background white white-background-hover adv-sal-green-hover adv-sal-green-border " style="margin-bottom:20px;">Submit</button>
+        </form>
         <div class="container-1200px row landing-section">
 
 
             {% for i in patients %} 
-
+                {% if i.percentage <= percentage %} 
               <!--  {% if i.floor == floor_no and i.room == room_no %} -->
                     <div class="col-lg-3 col-12  patient-column ">
                         <div class="light-grey-background all-border patient-column-inner">
@@ -102,7 +106,7 @@
 
                     </script> 
               <!--  {% endif %} -->
-
+                {% endif %}
             {% endfor %}
 
 

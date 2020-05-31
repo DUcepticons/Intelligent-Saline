@@ -9,6 +9,8 @@ class patient(models.Model):
 	device_id =  models.CharField(max_length=50, null=True, blank=True)
 	status = models.IntegerField(default = 0)
 	buzzer_status = models.IntegerField(default = 5)
+	patient_id =  models.CharField(max_length=50, null=True, blank=True)
+	saline_info =  models.CharField(max_length=50, null=True, blank=True)
 
 	def __str__(self):
 		return self.device_id

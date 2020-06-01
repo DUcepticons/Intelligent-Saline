@@ -206,7 +206,7 @@ def receive(request):
 		return HttpResponse('This Device is not in Database!!!')
 	
 @csrf_exempt
-def mute(request, device_id = 'PAT00001'):
+def mute(request, device_id = 'DEV00001'):
 	
 	new_device_id = request.POST.get('device_id','')
 	received_ID= patient.objects.filter(device_id=device_id)

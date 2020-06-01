@@ -159,7 +159,7 @@ def ajaxstatus(request):
 		received_ID.update(status=received_status)
 
 
-
+@login_required
 def devices(request):
 	if request.method == 'POST':
 		new_device_id = request.POST.get('device_id','')

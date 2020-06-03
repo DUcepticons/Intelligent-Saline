@@ -132,7 +132,7 @@ def ajaxroomdata(request):
 def ajaxhomeroomdata(request):
 	if request.method == 'GET':
 		return render(request=request,template_name="ajaxhomeroomdata.html",
-					context={"patients":patient.objects.all,
+					context={"patients": patient.objects.all().order_by('percentage'),
 				  	"floors":floors(),
 				  	"danger_value":10, "critical_value":20})
 

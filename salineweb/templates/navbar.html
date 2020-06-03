@@ -179,7 +179,7 @@ $(document).ready(function () {
                             {%for floor,room in rooms.items %}
                               {% if floor == number%}
                                   {% for room_number in room %}
-                                    <li><a class="dropdown-item" href="/floor/{{floor}}/room/{{room_number.0}}">Room 0{{room_number.0}}</a></li> 
+                                    <li><a class="dropdown-item" href="/floor/{{floor}}/room/{{room_number.0}}">Room {{room_number.0}}</a></li> 
                                   {% endfor %}    
                               {% endif %}
                             {% endfor %}             

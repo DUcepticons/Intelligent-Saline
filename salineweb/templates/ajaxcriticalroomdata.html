@@ -21,8 +21,51 @@
         </div>
       </div>
       
-      <p class="adv-sal-yellow text-center">For On/Off control visit page.</p>
-      
+      <a type="submit" method="POST" href="/{{i.device_id}}/" class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border" style="margin-bottom:10px;">Mute Buzzer</a> {% csrf_token %}
+      <div class="row">
+        <div class="col-3">
+            <h4 class="adv-sal-red" style="display: inline-block;margin-top: 3px;">Off</h4>
+        </div>
+        <div class="col-3 no-padding">
+            <label class="switch">
+            {% if i.status == 1 %}
+            <input type="checkbox" checked id="{{i}}">
+            {% elif i.status == 0 %}
+            <input type="checkbox" id="{{i}}">
+            {% endif %}
+            <span class="switch-slider round"></span>
+
+            </label>
+        </div>
+        <div class="col-3">
+            <h4 class="adv-sal-green" style="display: inline-block;margin-top: 3px;">On</h4>
+        </div>
+      </div>    
+      <script type="text/javascript">
+        $('#{{i}}').change(function() {
+            var checkbox_value;
+            var ajx_device_id = "{{i}}";
+            if (!$(this).is(':checked')) {
+                checkbox_value=0;
+            }
+            else
+            {
+                checkbox_value=1;
+            }
+  
+            $.ajax({
+                url: "/ajaxstatus",  
+                data: {'sent_device': ajx_device_id,'sent_status': checkbox_value},
+                type: "get",
+                success: function (){
+                    alert("done");
+                }
+  
+  
+  
+            });    
+        });
+      </script>  
     </div>
   </div>
 

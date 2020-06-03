@@ -22,8 +22,8 @@
                             <div class="row" id="bed{{i.bed_no}}">
 
                             </div>
-                            <a type="submit" method="POST" href="/{{i.device_id}}/" class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border">Mute Buzzer</a> {% csrf_token %}
-                            <!-- ON OFF SWITCH CODE DO NOT REMOVE 
+                            <a type="submit" method="POST" href="/{{i.device_id}}/" class="btn adv-sal-red-background white white-background-hover adv-sal-red-hover adv-sal-red-border" style="margin-bottom:10px;">Mute Buzzer</a> {% csrf_token %}
+                            
 
 
                             <div class="row">
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
 
-                            -->
+
 
                             <script type="text/javascript">
                                 $('#{{i}}').change(function() {

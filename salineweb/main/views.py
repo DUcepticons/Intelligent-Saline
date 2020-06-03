@@ -37,10 +37,10 @@ def all_rooms():
 
 @login_required
 def homepage(request):
-	#return HttpResponse('<h1>Hi Akash</h1>')
-	#a= patient(floor='1',room='1',bed_no='8',percentage='45')
+	patients = patient.objects.all().order_by('percentage')
+
 	return render(request=request,template_name="index.html",
-				  context={"patients":patient.objects.all,
+				  context={"lowest_level":patients[0].percentage,
 				  "floors":floors(),
 				  "rooms":all_rooms(),
 				  "critical_value":20})

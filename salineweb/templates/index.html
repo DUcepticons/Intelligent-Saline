@@ -5,6 +5,7 @@
 <body>
   {% include "navbar.html" %}
    
+   {% if lowest_level <= 20 %}
     <div class="section"  >
         <h1 class="adv-sal-yellow text-center" style="margin-bottom:50px;">Critical and <span class="adv-sal-red">Very Critical</span> Saline Levels</h1>
         <div class="container-1200px row landing-section">
@@ -39,6 +40,9 @@
 
         </script> 
   </div>  
+  {% else %}
+    <h1 class="adv-sal-yellow text-center" style="margin-bottom:50px;">Welcome bro</h1>
+    {% endif %}
 {% include "footer.html" %}    
 </body>
 

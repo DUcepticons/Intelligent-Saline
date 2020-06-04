@@ -41,7 +41,11 @@
         </script> 
   </div>  
   {% else %}
-    <h1 class="adv-sal-yellow text-center" style="margin-bottom:50px;">Welcome bro</h1>
+    <div class="section"  >
+        <h2 class="text-center" style="margin-bottom:50px;">Welcome to our Intravenous Saline Monitoring System</h2>
+        <h2 class="text-center" style="margin-bottom:50px;">This page will show the <span class="adv-sal-red">Very Critical (under 10%)</span> or <span class="adv-sal-yellow">Critical patients(under 20%)</span></h2>
+        <h2 class="text-center" style="margin-bottom:50px;">Currently all the saline levels are <span class="adv-sal-green">above 20%</span></h2>
+    </div> 
     {% endif %}
 {% include "footer.html" %}    
 </body>

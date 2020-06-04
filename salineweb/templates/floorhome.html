@@ -17,8 +17,10 @@
 
                 {% if i.floor == floor_no %} 
                     {% if i.percentage <= percentage %} 
+
                     <div class="col-lg-3 col-12  patient-column ">
                         <div class="light-grey-background all-border patient-column-inner">
+                            <p class="dark-grey" style="margin-bottom: 0px;"> Room: <span class="adv-sal-red bold-text">{{i.room}}</span></p>
                             <div class="row" id="bed{{i.bed_no}}">
 
                             </div>

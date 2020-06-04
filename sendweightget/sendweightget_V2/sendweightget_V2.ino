@@ -206,14 +206,14 @@ previous_sendPercentage=sendPercentage;
   if (push_button_state == 0)
   {
     count++;
-    if(sendPercentage <= critical_value  && very_critical_value < sendPercentage  && count>  8)
+    if(sendPercentage <= critical_value  && very_critical_value < sendPercentage  && count>  6)
       {
         buzzer_indication(1,500);
         count = 0;
       }
     else if(sendPercentage <= very_critical_value  && count>  4)
       {
-        buzzer_indication(2,250);
+        buzzer_indication(3,175);
         count = 0;
       }
   }

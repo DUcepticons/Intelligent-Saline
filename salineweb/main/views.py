@@ -38,9 +38,12 @@ def all_rooms():
 @login_required
 def homepage(request):
 	patients = patient.objects.all().order_by('percentage')
+	lowest_level = 100
+	if(len(patients)):
+		lowest_level = patients[0].percentage
 
 	return render(request=request,template_name="index.html",
-				  context={"lowest_level":patients[0].percentage,
+				  context={"lowest_level":lowest_level,
 				  "floors":floors(),
 				  "rooms":all_rooms(),
 				  "critical_value":20})

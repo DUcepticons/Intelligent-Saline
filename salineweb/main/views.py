@@ -190,16 +190,16 @@ def devices(request):
 
 
 @csrf_exempt
-def receive(request):
+def receive(request):#receive percentage from device and send status
 	received_values = request.body.decode('utf-8').split(",")
 	#The received_values list will be now like this [devive_id,percentage] e.g. [pat0001,90]
 	device_id=received_values[0]
 	percentage=received_values[1]
 
-	
-	STATUS = patient.objects.get(device_id=device_id).buzzer_status
+	STATUS = []
+	STATUS = [patient.objects.get(device_id=device_id).buzzer_status, patient.objects.get(device_id=device_id).status] #buzzer_status and staus taken to STATUS variable
 	received_ID= patient.objects.filter(device_id=device_id)
-	received_ID.update(buzzer_status = 0)
+	received_ID.update(buzzer_status = 5)	#again setting up buzzer_status to default(5)
 
 	if patient.objects.filter(device_id=device_id):
 		received_ID= patient.objects.filter(device_id=device_id)
@@ -213,5 +213,5 @@ def mute(request, device_id = 'DEV00001'):
 	
 	new_device_id = request.POST.get('device_id','')
 	received_ID= patient.objects.filter(device_id=device_id)
-	received_ID.update(buzzer_status = 1)
+	received_ID.update(buzzer_status = 6)#updating buzzer_status when pressed mute button
 	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

@@ -7,7 +7,7 @@ class patient(models.Model):
 	bed_no = models.IntegerField(default=0)
 	percentage = models.IntegerField(default=100)
 	device_id =  models.CharField(max_length=50, null=True, blank=True)
-	status = models.IntegerField(default = 0)
+	status = models.IntegerField(default = 1)
 	buzzer_status = models.IntegerField(default = 5)
 	patient_id =  models.CharField(max_length=50, null=True, blank=True)
 	saline_info =  models.CharField(max_length=50, null=True, blank=True)

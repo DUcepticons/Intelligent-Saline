@@ -3,8 +3,9 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266HTTPClient.h>
 #include <HX711.h>
+#include<Servo.h> 
 
-String DEV_ID = "DEV00001";                                   //Input the device id here
+String DEV_ID = "DEV00002";                                   //Input the device id here
 const char *ssid = "DUcepticons";                                 //ENTER YOUR WIFI SETTINGS
 const char *password = "webpass321";
 
@@ -19,6 +20,7 @@ const int SCALE_SCK_PIN = D5;
 const int Buzzer = D8;
 const int LED = D7;
 const int Push_button = D3;
+const int ServoPin = D2;
 int push_button_state = 0;
 
 int flag = 0;
@@ -32,12 +34,17 @@ String payload;
 float full_bag_weight;
 float package_weight;
 
+String previousOnOff_status = "1";
+
 void buzzer_alarm(int rate);        // input how many times to beep in a second
 void buzzer_stop();
 void buzzer_indication(int times, int Delay);  //input how many times to beep buzzer and stop
 
 HX711 scale(SCALE_DOUT_PIN, SCALE_SCK_PIN);
+void Lock(int Speed, int Delay);//Flow block function
+void Open(int Speed, int Delay);//Flow open function
 
+Servo servo;      // Flow blockeer servo declare
 //=======================================================================
 //                    Power on setup
 //=======================================================================
@@ -133,6 +140,8 @@ Serial.println("Saline recognized as "+ String(initial_saline_weight));
   Serial.println("full_bag_weight: "+ String(full_bag_weight));
   Serial.println("package_weight: "+ String(package_weight));
   buzzer_stop();
+
+  servo.attach(ServoPin);
 }
 
 //=======================================================================
@@ -152,10 +161,12 @@ void loop() {
  //GET Data
   
   sendPercentage= (weight/initial_saline_weight)*100 ;
+  
+  //Keeping in range of 0-100
   if(sendPercentage<0)sendPercentage=0;
   if(sendPercentage>100)sendPercentage=100;
   
-Serial.println(sendPercentage);
+  Serial.println(sendPercentage);
 
   String postData = DEV_ID + "," + String(sendPercentage);
   Serial.print(postData);
@@ -169,6 +180,19 @@ Serial.println(sendPercentage);
   Serial.println("payload" + payload);    //Print request response payload
   http.end();  //Close connection
 
+//==========================================
+//Flow ON/OFF function
+//if toggled OFF
+if((String)payload[1] == "0" && previousOnOff_status != (String)payload[1]){
+  Lock(70, 4500);
+  Serial.println("Saline flow Blocked!!!");
+}
+//if toggled ON
+if((String)payload[1] == "1" && previousOnOff_status != (String)payload[1]){
+  Open(110, 4500);
+  Serial.println("Saline flow Open...");
+}
+previousOnOff_status = (String)payload[1];
 
 /*
 //debugging
@@ -186,7 +210,7 @@ else
 }
 */
 
-//push_button_state change for entering 1-10% zone from 11-20% zone
+//push_button_state change for entering 1-10%zone from 11-20%zone
 if ((previous_sendPercentage <=critical_value  && previous_sendPercentage >very_critical_value) && (sendPercentage<=very_critical_value))
 {
   push_button_state = 0;
@@ -195,7 +219,7 @@ previous_sendPercentage=sendPercentage;
 
 
 //Push button read
-  int button = digitalRead(Push_button);    // it gives 0 for press, 1 otherwise
+  int button = digitalRead(Push_button);    // it reads 0 for press, 1 otherwise
   if (button == 0)Serial.println("button pressed");
   if((sendPercentage <= critical_value) && (button == 0 || (String)payload[0] == "6"))push_button_state = 1;   //when percentage under critical and mute button pressed
   //Serial.println(push_button_state);                                                              //payload returns 1 if mute button pressed
@@ -247,4 +271,24 @@ void buzzer_indication(int times, int Delay){
     digitalWrite(LED,LOW );
     delay(Delay);
   }
+}
+
+//Flow block function
+void Open(int Speed, int Delay){
+  //When speed==90;stop
+  //When speed>90;clockwise
+  //When speed<90;anticlockwise
+  servo.write(Speed);
+  delay(Delay);
+  servo.write(90);
+}
+
+//Flow open function
+void Lock(int Speed, int Delay){
+  //When speed==90;stop
+  //When speed>90;clockwise
+  //When speed<90;anticlockwise
+  servo.write(Speed);
+  delay(Delay);
+  servo.write(90);
 }

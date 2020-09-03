@@ -3,7 +3,8 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266HTTPClient.h>
 #include <HX711.h>
-#include<Servo.h> 
+#include<Servo.h>
+#include <EEPROM.h>
 
 String DEV_ID = "DEV00002";                                   //Input the device id here
 const char *ssid = "DUcepticons";                                 //ENTER YOUR WIFI SETTINGS
@@ -13,8 +14,12 @@ const char *password = "webpass321";
 const char *host = "192.168.0.102"; 
 String Link = "http://192.168.0.102:8000/receive/";
 
-int critical_value = 20;
+char eepromStatus;
+int EEPROMaddress = 0; //Reading from address 0x00
+
+int critical_value = 15;
 int very_critical_value = 10;
+int flow_block_value = 5;
 const int SCALE_DOUT_PIN = D6;
 const int SCALE_SCK_PIN = D5;
 const int Buzzer = D8;
@@ -51,6 +56,7 @@ Servo servo;      // Flow blockeer servo declare
 
 void setup() {
   Serial.begin(115200);
+  EEPROM.begin(512);  //Initialize EEPROM
   scale.set_scale(45);// <- set here calibration factor!!!
   scale.tare();
   pinMode(Buzzer,OUTPUT);
@@ -142,6 +148,15 @@ Serial.println("Saline recognized as "+ String(initial_saline_weight));
   buzzer_stop();
 
   servo.attach(ServoPin);
+
+  char eepromStatus = EEPROM.read(EEPROMaddress);
+  
+//if it was previously blocked, turn it on
+  if (eepromStatus == '1'){
+    Open(110, 4500);
+    Serial.println("Saline flow Open...");
+    EEPROM.write(EEPROMaddress, '0');    //Write character 0, meaning flow is turned on   
+  }
 }
 
 //=======================================================================
@@ -186,11 +201,13 @@ void loop() {
 if((String)payload[1] == "0" && previousOnOff_status != (String)payload[1]){
   Lock(70, 4500);
   Serial.println("Saline flow Blocked!!!");
+  eepromStatus = '1';
 }
 //if toggled ON
 if((String)payload[1] == "1" && previousOnOff_status != (String)payload[1]){
   Open(110, 4500);
   Serial.println("Saline flow Open...");
+  eepromStatus = '0';
 }
 previousOnOff_status = (String)payload[1];
 
@@ -222,7 +239,7 @@ previous_sendPercentage=sendPercentage;
   int button = digitalRead(Push_button);    // it reads 0 for press, 1 otherwise
   if (button == 0)Serial.println("button pressed");
   if((sendPercentage <= critical_value) && (button == 0 || (String)payload[0] == "6"))push_button_state = 1;   //when percentage under critical and mute button pressed
-  //Serial.println(push_button_state);                                                              //payload returns 1 if mute button pressed
+  //Serial.println(push_button_state);                                                              //payload returns 6 if mute button pressed
   Serial.println("\n\n");
 
   
@@ -245,6 +262,19 @@ if (sendPercentage >=critical_value)
 {
   delay(1000);
   push_button_state = 0;
+}
+
+//flow block whenever percentage under flow_block_value
+if (sendPercentage <= flow_block_value && eepromStatus != '1'){
+   //if percentage<= flow_block_value and if flow was not blocked previously
+  digitalWrite(Buzzer,HIGH);
+  digitalWrite(LED,HIGH);
+  Lock(70, 4500);
+  Serial.println("Saline flow Blocked!!!"); 
+  digitalWrite(Buzzer,LOW );
+  digitalWrite(LED,LOW );
+  EEPROM.write(EEPROMaddress, '1');    //Write character 1, meaning flow is blocked
+
 }
   
 }
